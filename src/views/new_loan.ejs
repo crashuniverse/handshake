@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Create New Loan</h1>
+      <a href="/" class="btn-secondary">Back to Dashboard</a>
+    </header>
+
+    <form action="/loans" method="POST" class="loan-form">
+      <div class="form-group">
+        <label for="name">Loan Name / Description</label>
+        <input type="text" id="name" name="name" placeholder="e.g. Car Loan for John" required>
+      </div>
+
+      <div class="form-group">
+        <label for="lender">Lender Name</label>
+        <input type="text" id="lender" name="lender" required>
+      </div>
+      <div class="form-group">
+        <label for="borrower">Borrower Name</label>
+        <input type="text" id="borrower" name="borrower" required>
+      </div>
+
+      <div class="form-group">
+        <label for="amount">Amount (₹)</label>
+        <input type="number" id="amount" name="amount" step="0.01" required>
+      </div>
+      <div class="form-group">
+        <label for="interest_rate">Interest Rate (% per annum)</label>
+        <input type="number" id="interest_rate" name="interest_rate" step="0.01" value="8.50" required>
+        <small>Standard SBI Home Loan Rate approx 8.50%</small>
+      </div>
+
+      <div class="form-group">
+        <label for="duration_months">Duration (Months)</label>
+        <input type="number" id="duration_months" name="duration_months" required>
+      </div>
+      <div class="form-group">
+        <label for="start_date">Start Date</label>
+        <input type="date" id="start_date" name="start_date" required>
+      </div>
+
+      <button type="submit" class="btn-primary">Create Loan</button>
+    </form>
+  </div>
+
+  <script>
+    // Set default date to today
+    document.getElementById('start_date').valueAsDate = new Date();
+  </script>
+</body>
+</html>

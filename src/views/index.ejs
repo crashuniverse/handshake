@@ -8,9 +8,54 @@
 </head>
 <body>
   <div class="container">
-    <h1>Welcome to Handshake</h1>
-    <p>P2P Lending Tracking Software</p>
-    <p>Status: Placeholder</p>
+    <header class="dashboard-header">
+      <div>
+        <h1>Handshake Dashboard</h1>
+        <p>Track your P2P Loans</p>
+      </div>
+      <a href="/loans/new" class="btn-primary">New Loan</a>
+    </header>
+
+    <% if (loans.length === 0) { %>
+      <div class="empty-state">
+        <p>No loans found. Create one to get started!</p>
+      </div>
+    <% } else { %>
+      <div class="table-responsive">
+        <table class="loan-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Lender &rarr; Borrower</th>
+              <th>Principal</th>
+              <th>Rate</th>
+              <th>Start Date</th>
+              <th>Accrued Interest</th>
+              <th>Total Due</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% loans.forEach(function(loan) { %>
+              <tr>
+                <td>
+                  <strong><a href="/loans/<%= loan.id %>" class="loan-link"><%= loan.name %></a></strong>
+                </td>
+                <td>
+                  <%= loan.lender %> &rarr; <%= loan.borrower %>
+                </td>
+                <td>₹<%= loan.amount.toLocaleString() %></td>
+                <td><%= loan.interest_rate %>%</td>
+                <td><%= loan.start_date %> <br><small>(<%= loan.days_elapsed %> days ago)</small></td>
+                <td class="text-highlight">₹<%= loan.interest_accrued %></td>
+                <td class="text-bold">₹<%= Number(loan.total_amount).toLocaleString() %></td>
+                <td><span class="status-badge <%= loan.status.toLowerCase() %>"><%= loan.status %></span></td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
   </div>
 </body>
 </html>
